@@ -1,16 +1,15 @@
-def k8s_manifests(imageTag) {
+def k8s_manifests(String imageTag) {
     withCredentials([usernamePassword(
-        credentialsId: 'github-credentials', // The ID of the credentials stored in Jenkins
-        usernameVariable: 'GIT_USERNAME',    // The environment variable to store the GitHub username
-        passwordVariable: 'GIT_PASSWORD'     // The environment variable to store the GitHub password or token
+        credentialsId: 'github-credentials',
+        usernameVariable: 'GIT_USERNAME',
+        passwordVariable: 'GIT_PASSWORD'
     )]) {
-        // The shell block that uses the Git credentials
         sh """
             # Git Configuration
             git config user.name "Jenkins CI"
             git config user.email "dakshsawhney2@gmail.com"
             
-            # Replace image tags in your app manifests (hardcoded for WearSphere)
+            # Replace image tags in your app manifests
             sed -i "s|image: dakshsawhneyy/wearsphere-backend:.*|image: dakshsawhneyy/wearsphere-backend:${imageTag}|g" kubernetes/backend-deployment.yaml
             sed -i "s|image: dakshsawhneyy/wearsphere-frontend:.*|image: dakshsawhneyy/wearsphere-frontend:${imageTag}|g" kubernetes/frontend-deployment.yaml
             sed -i "s|image: dakshsawhneyy/wearsphere-admin:.*|image: dakshsawhneyy/wearsphere-admin:${imageTag}|g" kubernetes/admin-deployment.yaml
