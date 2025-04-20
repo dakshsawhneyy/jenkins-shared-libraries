@@ -7,9 +7,9 @@ def call(String imageTag) {
         sh """
             git config user.name "Jenkins CI"
             git config user.email "dakshsawhney2@gmail.com"
-            sed -i "s|image: dakshsawhneyy/wearsphere-backend:.*|image: dakshsawhneyy/wearsphere-backend:${imageTag}|g" kubernetes/backend-deployment.yaml
-            sed -i "s|image: dakshsawhneyy/wearsphere-frontend:.*|image: dakshsawhneyy/wearsphere-frontend:${imageTag}|g" kubernetes/frontend-deployment.yaml
-            sed -i "s|image: dakshsawhneyy/wearsphere-admin:.*|image: dakshsawhneyy/wearsphere-admin:${imageTag}|g" kubernetes/admin-deployment.yaml
+            sed -i "s|image: dakshsawhneyy/wearsphere-backend:.*|image: dakshsawhneyy/wearsphere-backend:${imageTag}|g" kubernetes/backend-deployment.yml
+            sed -i "s|image: dakshsawhneyy/wearsphere-frontend:.*|image: dakshsawhneyy/wearsphere-frontend:${imageTag}|g" kubernetes/frontend_deployment.yml
+            sed -i "s|image: dakshsawhneyy/wearsphere-admin:.*|image: dakshsawhneyy/wearsphere-admin:${imageTag}|g" kubernetes/admin_deployment.yml
 
             if git diff --quiet; then
                 echo "✅ No changes to commit."
